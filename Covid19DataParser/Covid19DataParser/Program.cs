@@ -68,7 +68,7 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
 
             if(kvpCity.Value.days.ContainsKey(daystr))
             {
-                lineToWrite += $"{kvpCity.Value.days[daystr].Item1};{kvpCity.Value.days[daystr].Item2};";
+                lineToWrite += $"{kvpCity.Value.days[daystr].Item1},{kvpCity.Value.days[daystr].Item2};";
             }
             else
             {
