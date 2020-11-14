@@ -45,11 +45,12 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
     DateTime enddate = Convert.ToDateTime("2020-11-02");
 
     var linestoWrite = new List<string>();
-    var headerLine = "CityName;";
+    var headerLine = "Id;CityName;";
 
     while (curentDate < enddate)
     {
-        headerLine += curentDate.ToString("yyyy-MM-dd") + ";";
+        var datestr = curentDate.ToString("yyyy-MM-dd");
+        headerLine += $"N-{datestr};A-{datestr};";
         curentDate = curentDate.AddDays(1);
     }
     linestoWrite.Add(headerLine);
@@ -72,7 +73,7 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
             }
             else
             {
-                lineToWrite += "NA,NA;"; 
+                lineToWrite += "NA;NA;"; 
             }
 
             curentDate = curentDate.AddDays(1);
