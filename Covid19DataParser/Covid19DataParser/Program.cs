@@ -15,6 +15,27 @@ var filename = @"C:\Work\VSB\Covid-19-cz\obce\obec.csv";
 FileStream fileStream = new(filename, FileMode.Open, FileAccess.Read);
 Dictionary<string,City> cities = new();
 
+Func<string, string> get7BitString = (string s) =>
+{
+    string source = s.ToLower();
+    string SET1 = "áäàãčçďéěëêèíľňóöřšťúůüùýž";
+    string SET2 = "aaaaccdeeeeeilnoorstuuuuyz";
+    StringBuilder sb = new StringBuilder();
+    foreach (char ch in source)
+    {
+        int index = SET1.IndexOf(ch);
+        if (index >= 0)
+        {
+            sb.Append(SET2[index]);
+        }
+        else
+        {
+            sb.Append(ch);
+        }
+    }
+    return sb.ToString();
+};
+
 using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
 {
     string line;
@@ -62,7 +83,7 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
 
     foreach(var kvpCity in cities.ToList())
     {
-        var lineToWrite = kvpCity.Key+";" + kvpCity.Value.Name + ";";
+        var lineToWrite = kvpCity.Key+";" + get7BitString(kvpCity.Value.Name) + ";";
         while (curentDate < enddate)
         {
             var daystr = curentDate.ToString("yyyy-MM-dd");
