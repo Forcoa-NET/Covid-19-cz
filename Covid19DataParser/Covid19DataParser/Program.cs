@@ -4,12 +4,24 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+
 const int DATE_COLUMN_INDEX = 1;
 const int CITY_CODE__COLUMN_INDEX = 10;
 const int CITY_NAME__COLUMN_INDEX = 11;
 const int NEW_CASES_COLUMN_INDEX = 12;
 const int CURENT_CASES_COLUMN_INDEX = 13;
 
+
+/*
+const int DATE_COLUMN_INDEX = 1;
+const int CITY_CODE__COLUMN_INDEX = 10;
+const int CITY_NAME__COLUMN_INDEX = 9;
+const int NEW_CASES_COLUMN_INDEX = 11;
+const int CURENT_CASES_COLUMN_INDEX = 12;
+*/
+
+
+// var filename = @"C:\Work\VSB\Covid-19-cz\obce\mestske-casti.csv";
 var filename = @"C:\Work\VSB\Covid-19-cz\obce\obec.csv";
 
 FileStream fileStream = new(filename, FileMode.Open, FileAccess.Read);
@@ -63,7 +75,7 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
 
     // Generate header line
     DateTime curentDate = Convert.ToDateTime("2020-03-01");
-    DateTime enddate = Convert.ToDateTime("2020-11-02");
+    DateTime enddate = Convert.ToDateTime("2020-11-29");
 
     var linestoWrite = new List<string>();
     var headerLine = "Id;CityName;";
@@ -79,7 +91,7 @@ using (var streamReader = new StreamReader(fileStream, Encoding.UTF8))
     // Generate lines to write
 
     curentDate = Convert.ToDateTime("2020-03-01");
-    enddate = Convert.ToDateTime("2020-11-02");
+    enddate = Convert.ToDateTime("2020-11-29");
 
     foreach(var kvpCity in cities.ToList())
     {
